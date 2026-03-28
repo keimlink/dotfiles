@@ -17,7 +17,7 @@ During setup you will be asked to choose a machine profile (`personal` or `work`
 | Component | Tool | Description |
 |-----------|------|-------------|
 | Dotfile orchestration | chezmoi | Templates, scripts, secrets |
-| App config management | Mackup | Sublime Text, Ghostty, Dash, zsh, git, ssh |
+| App config management | Mackup | Sublime Text, Ghostty, Dash, Starship |
 | Software installation | Homebrew + Brewfile | CLI tools, desktop apps, App Store apps |
 | Zsh plugin management | Zinit | Oh My Zsh snippets + third-party plugins |
 | Prompt | Starship | Fast, minimal prompt |
@@ -64,7 +64,9 @@ GitHub Copilot CLI is installed as a Homebrew cask (`copilot-cli`) and is theref
 
 ## App Configs (Mackup)
 
-Mackup manages config files for: Sublime Text, Ghostty, Dash, zsh, git, ssh.
+Mackup manages config files for: Dash, Ghostty, Starship, and Sublime Text. With `engine = file_system`, Mackup copies (not symlinks) files between the backup location (`dotfiles/mackup`) and the app config paths.
+
+A custom Mackup definition for Dash (`~/.mackup/dash.cfg`) overrides the built-in one to exclude the licence file.
 
 After setting up a new Mac, `mackup restore` is run automatically by the chezmoi bootstrap script.
 
