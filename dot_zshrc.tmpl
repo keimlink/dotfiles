@@ -1,0 +1,43 @@
+# Zinit plugin manager — auto-install if missing
+ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
+if [ ! -d "$ZINIT_HOME" ]; then
+  git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
+fi
+source "${ZINIT_HOME}/zinit.zsh"
+
+# Oh My Zsh snippets
+zinit snippet OMZL::history.zsh
+zinit snippet OMZL::directories.zsh
+zinit snippet OMZL::completion.zsh
+zinit snippet OMZL::key-bindings.zsh
+
+# Oh My Zsh plugins
+zinit snippet OMZP::git
+zinit snippet OMZP::docker
+zinit snippet OMZP::macos
+zinit snippet OMZP::brew
+
+# Third-party plugins
+zinit light zsh-users/zsh-completions
+zinit light zsh-users/zsh-autosuggestions
+zinit light zsh-users/zsh-syntax-highlighting
+
+# Editor
+export EDITOR="subl -w"
+
+# Common aliases
+alias ll="ls -lAh"
+alias gs="git status"
+alias gp="git pull"
+alias gc="git commit"
+
+{{ if eq .profile "personal" -}}
+# Personal profile
+export GITHUB_USER="{{ .github_user }}"
+{{ else if eq .profile "work" -}}
+# Work profile
+export GITHUB_USER="{{ .github_user }}"
+{{ end -}}
+
+# Initialize Starship prompt
+eval "$(starship init zsh)"

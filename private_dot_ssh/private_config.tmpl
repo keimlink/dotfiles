@@ -1,0 +1,14 @@
+Host github.com
+  HostName github.com
+  User git
+  IdentityFile ~/.ssh/id_ed25519
+{{ if eq .profile "personal" -}}
+  IdentityAgent "~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
+
+# Example personal-only host using 1Password secrets
+Host personal-server
+  HostName {{ onepasswordRead "op://Private/personal-server/hostname" }}
+  User {{ onepasswordRead "op://Private/personal-server/username" }}
+  IdentityFile ~/.ssh/id_ed25519
+  IdentityAgent "~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
+{{ end -}}

@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+{{ if eq .chezmoi.os "darwin" -}}
+if command -v mackup &>/dev/null; then
+  echo "Restoring app configs with Mackup..."
+  mackup restore --force
+else
+  echo "Mackup not found, skipping restore."
+fi
+{{ end -}}

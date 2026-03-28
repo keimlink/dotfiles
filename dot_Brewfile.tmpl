@@ -1,0 +1,44 @@
+# === Shared across all machines ===
+tap "homebrew/bundle"
+
+# CLI tools
+brew "git"
+brew "gh"
+brew "mas"
+brew "mackup"
+brew "zsh"
+brew "jq"
+brew "ripgrep"
+brew "fzf"
+brew "tree"
+brew "wget"
+brew "chezmoi"
+brew "podman"
+brew "starship"
+
+# Desktop apps
+cask "firefox"
+cask "sublime-text"
+cask "podman-desktop"
+cask "rectangle"
+cask "copilot-cli"
+
+{{ if eq .profile "personal" -}}
+# === Personal only ===
+cask "1password"
+cask "1password-cli"
+cask "vlc"
+cask "steam"
+
+mas "Amphetamine", id: 937984704
+mas "Magnet", id: 441258766
+{{ end -}}
+
+{{ if eq .profile "work" -}}
+# === Work only ===
+mas "Microsoft Outlook", id: 985367838
+mas "Microsoft Teams", id: 1295779129
+mas "Microsoft To Do", id: 1274495053
+mas "Microsoft Edge", id: 1480068668
+mas "Keeper Password Manager", id: 966502267
+{{ end -}}

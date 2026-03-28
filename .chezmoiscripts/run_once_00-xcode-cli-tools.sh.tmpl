@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+{{ if eq .chezmoi.os "darwin" -}}
+# Install Xcode Command Line Tools if missing
+if ! xcode-select --print-path &>/dev/null; then
+  echo "Installing Xcode Command Line Tools..."
+  touch /tmp/.com.apple.dt.CommandLineTools.installondemand.in-progress
+  PROD=$(softwareupdate -l 2>/dev/null |
+    grep -E '^\s+\*.*Command Line Tools' |
+    head -n 1 | awk -F'*' '{print $2}' | sed 's/^ *//' | tr -d '\n')
+  if [ -n "$PROD" ]; then
+    sudo softwareupdate -i "$PROD" --verbose
+  else
+    echo "Xcode Command Line Tools package not found via softwareupdate, trying xcode-select --install..."
+    xcode-select --install || true
+  fi
+  rm -f /tmp/.com.apple.dt.CommandLineTools.installondemand.in-progress
+else
+  echo "Xcode Command Line Tools already installed."
+fi
+{{ end -}}
