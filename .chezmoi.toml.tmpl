@@ -2,17 +2,22 @@
 {{- if stdinIsATTY -}}
 {{-   $profile = promptChoiceOnce . "profile" "Machine profile" (list "personal" "work") -}}
 {{- end -}}
+{{- $email := "" -}}
+{{- if stdinIsATTY -}}
+{{-   if eq $profile "personal" -}}
+{{-     $email = promptStringOnce . "email" "Personal email address" -}}
+{{-   else if eq $profile "work" -}}
+{{-     $email = promptStringOnce . "email" "Work email address" -}}
+{{-   end -}}
+{{- end -}}
 
 [data]
   profile = {{ $profile | quote }}
   name = "Markus Zapke-Gründemann"
   github_user = "keimlink"
+  email = {{ $email | quote }}
 
 {{ if eq $profile "personal" -}}
-  email = "personal@example.com"
-
 [onepassword]
   command = "op"
-{{ else if eq $profile "work" -}}
-  email = "work@example.com"
 {{ end -}}
