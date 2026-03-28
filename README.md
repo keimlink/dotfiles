@@ -68,7 +68,11 @@ Mackup manages config files for: Dash, Ghostty, Starship, and Sublime Text. With
 
 A custom Mackup definition for Dash (`~/.mackup/dash.cfg`) overrides the built-in one to exclude the licence file.
 
-After setting up a new Mac, `mackup restore` is run automatically by the chezmoi bootstrap script.
+After setting up a new Mac, restore app configs manually once chezmoi has applied the dotfiles:
+
+```sh
+mackup restore
+```
 
 To add a new app:
 
