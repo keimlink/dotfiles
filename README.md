@@ -34,7 +34,7 @@ During setup you will be asked to choose a machine profile (`personal` or `work`
 
 - 1Password + 1Password CLI
 - VLC, Steam
-- Amphetamine, Magnet (App Store)
+- Amphetamine (App Store)
 - 1Password SSH agent integration
 
 ### Work profile only
