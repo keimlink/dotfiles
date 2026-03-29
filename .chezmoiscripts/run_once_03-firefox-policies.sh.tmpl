@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+{{ if eq .chezmoi.os "darwin" -}}
+FIREFOX_DISTRIBUTION_DIR="/Applications/Firefox.app/Contents/Resources/distribution"
+POLICIES_SRC="{{ .chezmoi.sourceDir }}/firefox/policies.json"
+
+if [ -d "/Applications/Firefox.app" ]; then
+  echo "Copying Firefox policies..."
+  mkdir -p "$FIREFOX_DISTRIBUTION_DIR"
+  cp "$POLICIES_SRC" "$FIREFOX_DISTRIBUTION_DIR/policies.json"
+  echo "Firefox policies installed."
+else
+  echo "Firefox not found, skipping policies installation."
+fi
+{{ end -}}

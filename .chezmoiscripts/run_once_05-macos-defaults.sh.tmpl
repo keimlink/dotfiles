@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+{{ if eq .chezmoi.os "darwin" -}}
+echo "Applying macOS defaults..."
+bash "{{ .chezmoi.sourceDir }}/macos-defaults.sh"
+{{ end -}}
